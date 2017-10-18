@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Neighborhood Map</title>
+    <link href="css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed|Lobster" rel="stylesheet">
+</head>
+<body>
+  <div id="container">
+
+    <!-- ****************** Begin Side Bar ****************** -->
+
+    <div id="sidebar">
+      <span class="sidebar-title">Filter</span>
+
+      <div>
+        <input id="filter-input" data-bind="textInput: filterInput" autocomplete="on" type="text" placeholder="Enter location">
+      </div>
+
+      <span class="sidebar-title">Locations</span>
+
+      <div>
+        <ul data-bind="foreach: filtered">
+          <li class="sideLocations" data-bind="text: title, click: $parent.linkWiki, attr: {id: 'sideLoc' + $index()}"></li>
+        </ul>
+      </div>
+
+      <span class="sidebar-title">Information</span>
+
+      <div id="wikipedia">
+        <span id="wikiEmpty">Nothing here yet...</span>
+      </div>
+
+    </div>
+
+    <!-- ****************** End Side Bar / Begin Header ****************** -->
+
+    <div id="header">
+      <button id="hamburger-button">&#9776;</button>
+      <span class="title">Alolayya Neighborhood - Riyadh</span>
+    </div>
+
+    <!-- ****************** End Header / Begin Main Content ****************** -->
+
+    <div id="main">
+      <div id="map"></div>
+      <div id="footer">
+        See menu for details ← ← ← ←
+      </div>
+    </div>
+
+    <!-- ****************** End Main Content ****************** -->
+
+  </div>
+
+  <!-- ****************** Begin Script Loading ****************** -->
+
+  <script>
+
+  </script>
+  <!-- jQuery v3.2.1 -->
+  <script src="js/lib/jquery-3.2.1.min.js"></script>
+  <!-- Transit v0.9.12: http://ricostacruz.com/jquery.transit/ -->
+  <script src="js/lib/jquery.transit.min.js"></script>
+  <!-- Knockout v3.4.2 -->
+  <script src="js/lib/knockout-3.4.2.js"></script>
+  <!-- Our app! -->
+  <script src="js/app.js"></script>
+  <!-- Google Maps Javascript API -->
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzrYjN4P6oUFxmUUHdgeHrJ7m9oeRFvBc&v=3&callback=initMap">
+  </script>
+
+  <!-- ****************** End Script Loading ****************** -->
+
+</body>
+</html>

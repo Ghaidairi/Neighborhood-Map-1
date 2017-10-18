@@ -1,0 +1,169 @@
+
+/************************ GENERAL STYLES ************************/
+
+html,
+body {
+  font: 1em 'Ubuntu Condensed', Arial, sans-serif;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+a:link {
+  color: black;
+  background-color: lightblue;
+  text-decoration: none;
+}
+
+a:hover {
+  background-color: lightpink;
+}
+
+/************************ FILTERING BUTTON ************************/
+
+#filter-input {
+  font: 2em 'Ubuntu Condensed', Arial, sans-serif;
+  background: transparent;
+  margin-left: 10px;
+  width: 70%;
+  border: none;
+  border-bottom: 1px solid grey;
+}
+
+#filter-input:focus {
+  outline: 0;
+}
+
+/************************ CONTAINER ************************/
+
+#container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+/************************ HEADER ************************/
+
+#header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 60px;
+  width: 100%;
+  background-color: #f5fafa;
+}
+
+.title {
+  display: inline-block;
+  font: bold 2em 'Lobster', Arial, sans-serif;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 60px;
+  margin-left: 20px;
+}
+
+#hamburger-button {
+  display: none;
+  font: bold 2em 'Lobster', Arial, sans-serif;
+  color: lightblue;
+  background-color: transparent;
+  vertical-align: middle;
+  border: none;
+  padding: 0;
+  width: 46px;
+  height: 46px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#hamburger-button:focus {
+  outline: none;
+}
+
+/************************ SIDEBAR ************************/
+
+#sidebar {
+  position: absolute;
+  z-index: 1;
+  overflow-x: hidden;
+  left: 0;
+  top: 60px;
+  height: calc(100% - 60px);
+  width: 250px;
+  background: #d7ebeb;
+  border-right: 1px solid lightblue;
+  border-radius: 3px;
+  box-shadow: 0 1em 2em rgba(0,0,0,1.5);
+  line-height: 35px;
+  padding: 0 10px 0 10px;
+  color: black;
+  text-align: justify;
+}
+
+.sidebar-title {
+  display: block;
+  font: bold 2em 'Lobster', Arial, sans-serif;
+  margin: 0.5em 0.5em 0.5em 0.5em;
+}
+
+.sideLocations {
+  text-align: left !important;
+  cursor: pointer;
+}
+
+.sideLocations:hover {
+  text-decoration: dashed underline overline lightblue;
+}
+
+/************************ MAIN CONTENT ************************/
+
+#map {
+  position: absolute;
+  top: 60px;
+  bottom: 0;
+  left: 250px;
+  right: 0;
+  height: calc(100% - 60px);
+}
+
+/************************ FOOTER ************************/
+
+#footer {
+  opacity: 0;
+  position: absolute;
+  bottom: 2em;
+  right: 3em;
+  font-size: 1em;
+  background-color: lightpink;
+  color: #f5fafa;
+  text-align: justify;
+  width: 74px;
+  border: 1px solid red;
+  padding: 5px;
+}
+
+/************************ MOBILE STYLING ************************/
+
+@media (max-width: 768px) {
+
+  #sidebar {
+    position: absolute;
+    transform: translate(-300px, 0);
+    transition: transform 0.3s ease;
+  }
+
+  #map {
+    left: 0;
+  }
+
+  #hamburger-button {
+    display: inline-block;
+  }
+}
+
+@media (max-width: 450px) {
+  .title {
+    font-size: 1.25em;
+  }
+}
