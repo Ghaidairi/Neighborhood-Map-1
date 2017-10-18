@@ -12,11 +12,11 @@ The application is responsive to all desktop and mobile screens, with a filterin
 ## Used libraries and services
 
 * [Knockout v3.4.2](http://knockoutjs.com/)
-* [Google Maps Javascript API](https://developers.google.com/maps/documentation/javascript/)
+* [Google Maps Javascript API v3.30](https://developers.google.com/maps/documentation/javascript/)
 * [jQuery v3.2.1](https://jquery.com/)
 * [Transit v0.9.12](http://ricostacruz.com/jquery.transit/)
-* [Wikipedia API](https://www.mediawiki.org/wiki/API:Main_page)
+* [Wikipedia API v1.17](https://www.mediawiki.org/wiki/API:Main_page)
 
 ## Live Demo
 
-To be added!
+[Click here to give it a try!](https://sami-almalki.github.io/Neighborhood-Map/index.html)
