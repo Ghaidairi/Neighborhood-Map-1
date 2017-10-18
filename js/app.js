@@ -75,6 +75,7 @@ var MapViewModel = function() {
       this.wikiInfo(i);
 
       // Listening to clicks on the marker
+      /* jshint loopfunc: true */
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
           // Creating InfoWindow
