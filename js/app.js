@@ -26,7 +26,7 @@ var Model = function() {
   this.locationsTotal = 11;
   // Is sidebar shown?
   this.sidebar = false;
-}
+};
 
 /************************ OUR VIEW MODEL ************************/
 
@@ -91,7 +91,7 @@ var MapViewModel = function() {
             $('#footer').transition({ opacity: 0 });
             $('#hamburger-button').css('background-color', 'transparent');
           }, 2000);
-        }
+        };
       })(marker, i));
 
       // Extending map to show current marker
@@ -106,8 +106,7 @@ var MapViewModel = function() {
     // The Wikipedia info. content
     var content = '';
     // The Wikipedia web service URL
-    var wikiURL = 'https://en.wikipedia.org/w/api.php?action=opensearch&search='
-                   + model.locations[i].title + '&format=json&callback=wikiCallback';
+    var wikiURL = 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + model.locations[i].title + '&format=json&callback=wikiCallback';
     // Getting the Wikipedia info. using AJAX request
     $.ajax({
       url: wikiURL,
@@ -231,14 +230,14 @@ var MapViewModel = function() {
     }
   });
 
-}
+};
 
 /************************ GLOBAL FUNCTIONS ************************/
 
 // A function to load a location and get its title
 var aLocation = function(data) {
   this.name = ko.observable(data.title);
-}
+};
 
 // A function to initialize the map and apply bindings
 function initMap() {
@@ -250,4 +249,4 @@ function initMap() {
 // A function to catch Google Map authentication errors
 gm_authFailure = function() {
   alert('Error: Cannot load Google Maps data!');
-}
+};
