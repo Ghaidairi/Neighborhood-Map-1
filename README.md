@@ -5,9 +5,17 @@ This application uses Google Maps APIs to feature a neighborhood map with a chos
 
 ## Usage
 
-After running the application, You will see my neighborhood map with a set of chosen markers. The markers are also listed in the sidebar, and when clicking on any of them, information about that location will be displayed.
+To run the application:
 
-The application is responsive to all desktop and mobile screens, with a filtering built-in functionality to search for a specific location amongst all listed locations.
+* Download or clone the repository from [here](https://github.com/sami-almalki/Neighborhood-Map).
+* Open the main page `index.html` to use the application.
+* After running the application, You will see my neighborhood map with a set of chosen `markers`.
+
+## Features
+
+* The application is `responsive` to all desktop and mobile screens.
+* The application has a `filtering` built-in functionality to search for a specific location amongst all listed locations.
+* In addition to displaying the markers on the map, they are also listed in the `sidebar`, and when clicking on any of them, information about that location will be displayed.
 
 ## Used libraries and services
 

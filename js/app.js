@@ -137,18 +137,22 @@ var MapViewModel = function() {
   };
 
   // A function to link sidebar locations list with Wikipedia info.
-  this.linkWiki = function(data, event) {
+  this.linkWiki = function(selected) {
     // Remove the initial Wikipedia placeholder
     $('#wikiEmpty').text('');
-    // Hiding all locations' Wikipedia info.
-    for (var i=0; i<model.locationsTotal; i++) {
-      $('#info-content-' + i).hide();
-    }
-    // Showing only current location Wikipedia info.
-    var current = ko.contextFor(event.target);
-    $('#info-content-' + current.$index()).show('slow');
-    // Animating the marker when clicked on the corresponding list item
-    self.animateMarker(model.locations[current.$index()].marker);
+    // looping into all locations
+    model.locations.forEach(function(loc, index) {
+      // If this is the selected location
+      if (loc.title === selected.title) {
+        // Showing only current location Wikipedia info.
+        $('#info-content-' + index).show('slow');
+        // Animating the marker when clicked on the corresponding list item
+        self.animateMarker(loc.marker);
+      } else {
+        // Hiding all other locations' Wikipedia info.
+        $('#info-content-' + index).hide();
+      }
+    });
   };
 
   // A function to show Wikipedia info. for current location
@@ -230,6 +234,9 @@ var MapViewModel = function() {
       model.sidebar = true;
     }
   });
+
+  // Listening to Google Map loading errors
+  document.getElementById('map').addEventListener('error', mapError);
 
 };
 
