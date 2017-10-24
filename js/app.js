@@ -1,15 +1,15 @@
 
 /************************ OUR MODEL ************************/
 
-var Model = function() {
+var Model = {
   // An array of markers
-  this.markers = [];
+  markers: [],
   // The neighborhood map
-  this.map;
+  map: '',
   // The InfoWindow Content
-  this.infoWindowContent = [];
+  infoWindowContent: [],
   // The neighborhood locations
-  this.locations = [
+  locations: [
     {title: 'Kingdom Centre', location: {lat: 24.711310, lng: 46.674448}, marker: {}},
     {title: 'Paris Gallery', location: {lat: 24.706469, lng: 46.678320}, marker: {}},
     {title: 'Al Faisaliyah Center', location: {lat: 24.690278, lng: 46.685278}, marker: {}},
@@ -21,29 +21,26 @@ var Model = function() {
     {title: 'Fuddruckers', location: {lat: 24.688878, lng: 46.673829}, marker: {}},
     {title: 'Narcissus Hotel and Residence Riyadh', location: {lat: 24.696040, lng: 46.683570}, marker: {}},
     {title: 'Aramex', location: {lat: 24.708839, lng: 46.689100}, marker: {}}
-  ];
+  ],
   // Total of neighborhood locations
-  this.locationsTotal = 11;
+  locationsTotal: 11,
   // Is sidebar shown?
-  this.sidebar = false;
+  sidebar: false
 };
 
 /************************ OUR VIEW MODEL ************************/
 
-var MapViewModel = function() {
+var ViewModel = function() {
   // Saving (this) pointing state
   self = this;
-
-  // A new instance of the model
-  var model = new Model();
 
   // A new observable for the filtering input text
   this.filterInput = ko.observable('');
 
   // Initialization of the neighborhood map
-  this.init = function() {
+  self.init = function() {
     // Creating the neighborhood map
-    model.map = new google.maps.Map(document.getElementById('map'), {
+    Model.map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 24.704563, lng: 46.676634},
       zoom: 14
     });
@@ -54,14 +51,14 @@ var MapViewModel = function() {
     var bounds = new google.maps.LatLngBounds();
 
     // Looping through the neighborhood locations array to create an array of markers
-    for (var i = 0; i < model.locations.length; i++) {
+    for (var i = 0; i < Model.locations.length; i++) {
 
-      var position = model.locations[i].location;
-      var title = model.locations[i].title;
+      var position = Model.locations[i].location;
+      var title = Model.locations[i].title;
 
       // Creating a marker
       var marker = new google.maps.Marker({
-        map: model.map,
+        map: Model.map,
         position: position,
         title: title,
         animation: google.maps.Animation.DROP,
@@ -69,7 +66,7 @@ var MapViewModel = function() {
       });
 
       // Pushing the marker into the locations array
-      model.locations[i].marker = marker;
+      Model.locations[i].marker = marker;
 
       // Getting Wikipedia info. for current location
       this.wikiInfo(i);
@@ -79,7 +76,7 @@ var MapViewModel = function() {
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
           // Creating InfoWindow
-          myInfoWindow.setContent(model.locations[i].title);
+          myInfoWindow.setContent(Model.locations[i].title);
           myInfoWindow.open(map, marker);
           // Animating marker
           self.animateMarker(marker);
@@ -96,10 +93,10 @@ var MapViewModel = function() {
       })(marker, i));
 
       // Extending map to show current marker
-      bounds.extend(model.locations[i].marker.position);
+      bounds.extend(Model.locations[i].marker.position);
     }
     // Extending map to show all markers
-    model.map.fitBounds(bounds);
+    Model.map.fitBounds(bounds);
   };
 
   // A function to get Wikipedia info. for current location
@@ -107,7 +104,7 @@ var MapViewModel = function() {
     // The Wikipedia info. content
     var content = '';
     // The Wikipedia web service URL
-    var wikiURL = 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + model.locations[i].title + '&format=json&callback=wikiCallback';
+    var wikiURL = 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + Model.locations[i].title + '&format=json&callback=wikiCallback';
     // Getting the Wikipedia info. using AJAX request
     $.ajax({
       url: wikiURL,
@@ -141,7 +138,7 @@ var MapViewModel = function() {
     // Remove the initial Wikipedia placeholder
     $('#wikiEmpty').text('');
     // looping into all locations
-    model.locations.forEach(function(loc, index) {
+    Model.locations.forEach(function(loc, index) {
       // If this is the selected location
       if (loc.title === selected.title) {
         // Showing only current location Wikipedia info.
@@ -160,7 +157,7 @@ var MapViewModel = function() {
     // Remove the initial Wikipedia placeholder
     $('#wikiEmpty').text('');
     // Hiding all locations' Wikipedia info.
-    for (var i=0; i<model.locationsTotal; i++) {
+    for (var i=0; i<Model.locationsTotal; i++) {
       $('#info-content-' + i).hide();
     }
     // Showing only current location Wikipedia info.
@@ -182,7 +179,7 @@ var MapViewModel = function() {
   // A computed observable to filter sidebar locations list depending on user input
   this.filtered = ko.computed(function() {
     // Filtering the array
-    this.filteredLocations = ko.utils.arrayFilter(model.locations, function(loc) {
+    this.filteredLocations = ko.utils.arrayFilter(Model.locations, function(loc) {
       // Getting filter keystrokes
       var filter = self.filterInput().toLowerCase();
       // Getting location title
@@ -191,6 +188,7 @@ var MapViewModel = function() {
       if (filter.length > locTitle.length)
         return false;
       // Checking the filter match and return the result
+      //loc.marker.setVisible(false);
       return locTitle.substring(0, filter.length) === filter;
     });
     // Return the filtered locations list
@@ -202,7 +200,7 @@ var MapViewModel = function() {
     // Initializing the filtering state
     this.filteredMarker = false;
     // Filtering the array
-    this.filteredLocs = ko.utils.arrayFilter(model.locations, function(loc) {
+    this.filteredLocs = ko.utils.arrayFilter(Model.locations, function(loc) {
       // Getting filter keystrokes
       var filter = self.filterInput().toLowerCase();
       // Getting location title
@@ -221,17 +219,17 @@ var MapViewModel = function() {
   // Listening to sidebar icon click
   $('#hamburger-button').click( function() {
     // If sidebar is open
-    if (model.sidebar) {
+    if (Model.sidebar) {
       // Close it
       $('#hamburger-button').transition({ perspective: '100px', rotateY: '180deg' });
       $('#sidebar').transition({ x: '-300px' });
-      model.sidebar = false;
+      Model.sidebar = false;
     // If sidebar is closed
     } else {
       // Open it
       $('#hamburger-button').transition({ perspective: '100px', rotateY: '-180deg' });
       $('#sidebar').transition({ x: '0' });
-      model.sidebar = true;
+      Model.sidebar = true;
     }
   });
 
@@ -249,7 +247,7 @@ var aLocation = function(data) {
 
 // A function to initialize the map and apply bindings
 function initMap() {
-  var vm = new MapViewModel();
+  var vm = new ViewModel();
   ko.applyBindings(vm);
   vm.init();
 }
