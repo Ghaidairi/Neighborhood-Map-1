@@ -130,7 +130,7 @@ var ViewModel = function() {
     .fail(function() {
       return parseAjax("failed");
     });
-  }
+  };
 
   // A function to parse and display the Wikipedia info.
   var parseAjax = function(response) {
